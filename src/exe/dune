@@ -8,6 +8,7 @@
     idds
     netkat.repl
     netkat.katbv_lib
+    core_unix.command_unix
  )
  (preprocess (pps ppx_jane))
  )

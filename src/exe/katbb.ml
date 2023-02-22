@@ -24,14 +24,16 @@ let compile_exp ?mgr (exp : Ast.exp) : Idd.t * int Hashtbl.M(String).t * Idd.man
   let idd = Idd_compiler.compile_exp ~mgr ~map_var exp in
   idd, tbl, mgr
 
+let timezone = Time_unix.Zone.local
+
 let time f =
-  let t1 = Unix.gettimeofday () in
+  let t1 = Time_ns_unix.Ofday.now ~zone:(force timezone) in
   let r = f () in
-  let t2 = Unix.gettimeofday () in
-  (t2 -. t1, r)
+  let t2 = Time_ns_unix.Ofday.now ~zone:(force timezone) in
+  (Time_ns.Ofday.diff t1 t2, r)
 
 let print_time ?(prefix="") time =
-  printf "%scompilation time: %.4f\n" prefix time
+  printf "%scompilation time: %s\n" prefix (Time_ns.Span.to_string time)
 
 
 (*===========================================================================*)
@@ -189,4 +191,4 @@ let main : Command.t =
     [("idd", idd); ("equiv", equiv); ("repl", repl); ("table", table)]
 
 let () =
-  Command.run ~version: "0.1" ~build_info: "N/A" main
+  Command_unix.run ~version: "0.1" ~build_info: "N/A" main

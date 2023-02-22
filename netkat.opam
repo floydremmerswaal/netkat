@@ -25,7 +25,8 @@ depends: [
   "dune" {>= "1.10"}
   "menhir" {build & >= "20190626"}
   "base" {>= "v0.12.0"}
-  "core" {>= "v0.12.0"}
+  "core" {>= "v0.15.0"}
+  "core_unix" {>= "v0.15.0"}
   "stdio" {>= "v0.12.0"}
   "odoc" {with-doc}
   "open" {>= "0"}
