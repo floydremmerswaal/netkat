@@ -30,7 +30,7 @@ let time f =
   let t1 = Time_ns_unix.Ofday.now ~zone:(force timezone) in
   let r = f () in
   let t2 = Time_ns_unix.Ofday.now ~zone:(force timezone) in
-  (Time_ns.Ofday.diff t1 t2, r)
+  (Time_ns.Ofday.diff t2 t1, r)
 
 let print_time ?(prefix="") time =
   printf "%scompilation time: %s\n" prefix (Time_ns.Span.to_string time)
